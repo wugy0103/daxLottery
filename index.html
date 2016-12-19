@@ -6,6 +6,87 @@
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
+<div id="main">
+    <div id="index">
+        <h3>健康猫年会抽奖</h3>
+        <h2>健康猫年会抽奖</h2>
+        <div id="code"><img src="style/images/qrcode.jpg"><br/><a class="clickBtn"
+                                                                  style="position:relative;">开启活动</a>
+        </div>
+        <div id="company">主办单位：健康猫</div>
+        <div id="copyright">技术支持：健康猫</div>
+    </div>
+
+    <div data-moduleid="100120" data-modulename="slotmachine" class="module" id="slotmachine">
+        <ul class="moduleBtn">
+            <li class="btn_slotmachine" data-name="slotmachine" data-description="开心摇奖机"><i class="iconfont">
+                &#xe61a;</i></li>
+        </ul>
+        <span class="title">摇奖机</span>
+
+        <div id="tigerBg">
+            <div class="tigerMain"></div>
+        </div>
+        <div id="tigerSelect" class="bgColor1">
+            奖项：
+            <div class="select" id="select_slotmachine">
+                <a data-prizeid="0" data-amount="0">请选择</a>
+            </div>
+            <div class="select_option" id="option_slotPrize"></div>
+            人数：
+            <div class="select">
+                <a data-prizeid="0" data-amount="0">请选择</a>
+            </div>
+            <div class="select_option" id="option_slotNumber">
+                <a data-number="1">
+                    <div>1</div>
+                </a>
+                <a data-number="2">
+                    <div>2</div>
+                </a>
+                <a data-number="3">
+                    <div>3</div>
+                </a>
+                <a data-number="4">
+                    <div>4</div>
+                </a>
+                <a data-number="5">
+                    <div>5</div>
+                </a>
+                <a data-number="6">
+                    <div>6</div>
+                </a>
+                <a data-number="7">
+                    <div>7</div>
+                </a>
+                <a data-number="8">
+                    <div>8</div>
+                </a>
+                <a data-number="9">
+                    <div>9</div>
+                </a>
+                <a data-number="10">
+                    <div>10</div>
+                </a>
+            </div>
+            <a href="javascript:void(0);" class="btn beginTiger">开始摇奖</a>
+            <a href="javascript:void(0);" class="btn tiger_submit">确认名单</a>
+        </div>
+        <div id="tigerUser">
+            <span class="prizeTitle">中奖名单</span>
+            <a class="left arrow"><i class="iconfont">&#xe617;</i></a>
+            <a class="right arrow"><i class="iconfont">&#xe618;</i></a>
+
+            <div id="tigerUserBox">
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="btnBox" style="visibility: hidden;">
+        <ul id="btn_change"></ul>
+    </div>
+</div>
 
 <script src="js/jquery.js"></script>
 <script src="js/common.js"></script>
