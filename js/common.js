@@ -1,59 +1,52 @@
-/**
- * Created by wugy on 2016/12/19.
- */
-$(function () {
-    (function () {
-        //œ˚œ¢Ã· æ£®type 1:’˝»∑–≈œ¢ 0:¥ÌŒÛ–≈œ¢£©
-        var showInfo = function (text, type) {
-            $(".info-box").remove();
-            if (type == 1) {
-                $("body").append("<div class='info-box'><div class=success>" + text + "</div></div>");
-            } else {
-                $("body").append("<div class='info-box'><div class=error>" + text + "</div></div>");
-            }
-            setTimeout(function () {
-                $(".info-box").animate({ "top": "50px", "opacity": 0 }, function () { $(".info-box").remove(); });
-            }, 2000)
-        };
+Ôªø//Ê∂àÊÅØÊèêÁ§∫Ôºàtype 1:Ê≠£Á°Æ‰ø°ÊÅØ 0:ÈîôËØØ‰ø°ÊÅØÔºâ
+var CommonShowInfo = function (text, type) {
+    $(".info-box").remove();
+    if (type == 1) {
+        $("body").append("<div class='info-box'><div class=success>" + text + "</div></div>");
+    } else {
+        $("body").append("<div class='info-box'><div class=error>" + text + "</div></div>");
+    }
+    setTimeout(function () {
+        $(".info-box").animate({ "top": "50px", "opacity": 0 }, function () { $(".info-box").remove(); });
+    }, 2000)
+};
 
-        //œ‘ æÃ· æ
-        var showTips = function (obj) {
-            var v = $(obj);
-            var _left = v.offset().left;
-            var _top = v.offset().top;
-            var _title = v.data('description');
-            var tipsStr = '<span class="tips_arrow">°Ù</span><div class="tips">' + _title + '</div>';
-            $('body').append(tipsStr);
-            $('.tips_arrow').css({ left: _left + 8, top: _top - 32 });
-            $('.tips').css({ 'left': _left, top: _top - 40, 'margin-left': -($('.tips').width() / 2) + 7 });
-        };
+//ÊòæÁ§∫ÊèêÁ§∫
+var CommonShowTips = function (obj) {
+    var v = $(obj);
+    var _left = v.offset().left;
+    var _top = v.offset().top;
+    var _title = v.data('description');
+    var tipsStr = '<span class="tips_arrow">‚óÜ</span><div class="tips">' + _title + '</div>';
+    $('body').append(tipsStr);
+    $('.tips_arrow').css({ left: _left + 8, top: _top - 32 });
+    $('.tips').css({ 'left': _left, top: _top - 40, 'margin-left': -($('.tips').width() / 2) + 7 });
+};
 
-        //“∆≥˝Ã· æ
-        var removeTips = function () {
-            $('.tips_arrow').remove();
-            $('.tips').remove();
-        };
+//ÁßªÈô§ÊèêÁ§∫
+var CommonRemoveTips = function () {
+    $('.tips_arrow').remove();
+    $('.tips').remove();
+};
 
-        //º”‘ÿ÷–
-        var loading = function (text) {
-            $('body').append('<div class="blackbg"></div><div id="loading"><img src="' + '/images/loading.gif" width="150">' + text + '</div>');
-        };
+//Âä†ËΩΩ‰∏≠
+var CommonLoading = function (text) {
+    $('body').append('<div class="blackbg"></div><div id="loading"><img src="' + '/images/loading.gif" width="150">' + text + '</div>');
+};
 
-        //º”‘ÿÕÍ≥…
-        var loaded = function () {
-            $('.blackbg').animate({ 'opacity': '0' }, function () { $('.blackbg').remove(); });
-            $('#loading').remove();
-        };
+//Âä†ËΩΩÂÆåÊàê
+var CommonLoaded = function () {
+    $('.blackbg').animate({ 'opacity': '0' }, function () { $('.blackbg').remove(); });
+    $('#loading').remove();
+};
 
-        var fillZero = function (number, digits) {
-            number = String(number);
-            var length = number.length;
-            if (number.length < digits) {
-                for (var i = 0; i < digits - length; i++) {
-                    number = "0" + number;
-                }
-            }
-            return number;
-        };
-    })()
-})
+var CommonFillZero = function (number, digits) {
+    number = String(number);
+    var length = number.length;
+    if (number.length < digits) {
+        for (var i = 0; i < digits - length; i++) {
+            number = "0" + number;
+        }
+    }
+    return number;
+};

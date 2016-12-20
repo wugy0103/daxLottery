@@ -2,7 +2,72 @@
  * Created by wugy on 2016/12/19.
  */
 $(function () {
-    (function () {
+    var Common =(function () {
+        //消息提示（type 1:正确信息 0:错误信息）
+        var showInfo = function (text, type) {
+            $(".info-box").remove();
+            if (type == 1) {
+                $("body").append("<div class='info-box'><div class=success>" + text + "</div></div>");
+            } else {
+                $("body").append("<div class='info-box'><div class=error>" + text + "</div></div>");
+            }
+            setTimeout(function () {
+                $(".info-box").animate({ "top": "50px", "opacity": 0 }, function () { $(".info-box").remove(); });
+            }, 2000)
+        };
+
+        //显示提示
+        var showTips = function (obj) {
+            var v = $(obj);
+            var _left = v.offset().left;
+            var _top = v.offset().top;
+            var _title = v.data('description');
+            var tipsStr = '<span class="tips_arrow">◆</span><div class="tips">' + _title + '</div>';
+            $('body').append(tipsStr);
+            $('.tips_arrow').css({ left: _left + 8, top: _top - 32 });
+            $('.tips').css({ 'left': _left, top: _top - 40, 'margin-left': -($('.tips').width() / 2) + 7 });
+        };
+
+        //移除提示
+        var removeTips = function () {
+            $('.tips_arrow').remove();
+            $('.tips').remove();
+        };
+
+        //加载中
+        var loading = function (text) {
+            $('body').append('<div class="blackbg"></div><div id="loading"><img src="' + '/images/loading.gif" width="150">' + text + '</div>');
+        };
+
+        //加载完成
+        var loaded = function () {
+            $('.blackbg').animate({ 'opacity': '0' }, function () { $('.blackbg').remove(); });
+            $('#loading').remove();
+        };
+
+        var fillZero = function (number, digits) {
+            number = String(number);
+            var length = number.length;
+            if (number.length < digits) {
+                for (var i = 0; i < digits - length; i++) {
+                    number = "0" + number;
+                }
+            }
+            return number;
+        };
+        var Common = {
+            showInfo:showInfo,
+            showTips:showTips,
+            removeTips:removeTips,
+            loading:loading,
+            loaded:loaded,
+            fillZero:fillZero
+        };
+        return Common;
+    })();
+
+
+    (function (Common) {
         //背景图显示大小
         var setBackgroundSize = function () {
             var scale = $(window).width() / $(window).height();
@@ -65,9 +130,9 @@ $(function () {
 
                 //绑定所有操作按钮鼠标滑过事件
                 $('#btn_change>li').hover(function () {
-                    moduleCommon.showTips(this);
+                    Common.showTips(this);
                 }, function () {
-                    moduleCommon.removeTips();
+                    Common.removeTips();
                 });
 
                 //显示操作按钮
@@ -91,13 +156,13 @@ $(function () {
                 }
             });
         };
+        init();
 
 
-
-    //    ---------------------------------------------------------------------------------
+        //    ---------------------------------------------------------------------------------
         var selfModuleName = 'slotmachine';
-        //var moduleCommon = require('common');
-        var fireWork = require('firework');
+        //var Common = require('common');
+        //var fireWork = require('firework');
         var moduleID = $('[data-modulename=' + selfModuleName + ']').data('moduleid');
         var scrollTime = 500; //滚动速度
         var IntervalTimer = parseInt(Math.random() * 500);//间隔时间
@@ -113,7 +178,7 @@ $(function () {
         var tigerUserUlWidth = 830;
         var ulHeight = 250;
         var ulHeightHalf = 125;
-        exports.init = function () {
+        var slotmachineInit = function () {
             $('body').on('active', function () {
                 $('#option_slotNumber a').click(function () {
                     selectLotteryNumber($(this));
@@ -164,10 +229,10 @@ $(function () {
                 }
             });
         };
-
+        slotmachineInit();
         //获取奖品信息
         var GetSlotMachinePrize = function () {
-            $.extendGetJSON("/style/json/GetSlotMachinePrize.json", {}, function (data) {
+            $.get("data/GetSlotMachinePrize.json", {}, function (data) {
                 if (data.length > 0) {
                     $('#option_slotPrize').empty();
                     $(data).each(function (index, element) {
@@ -178,26 +243,26 @@ $(function () {
                     selectPrize($(this));
                 });
             }, function () {
-                moduleCommon.showInfo("加载失败,请重试!");
-                moduleCommon.loaded();
+                Common.showInfo("加载失败,请重试!");
+                Common.loaded();
             });
         };
         //获取用户
         var GetSlotMachineFans = function () {
-            moduleCommon.loading('数据加载中,请稍后');
+            Common.loading('数据加载中,请稍后');
             userArray = [];
             $('#tigerUserBox ul').html('');
-            $.extendGetJSON("/style/json/GetSlotMachineFans.json", {}, function (data) {
+            $.get("data/GetSlotMachineFans.json", {}, function (data) {
                 if (data.length > 0) {
                     userArray = data;
                     setScrollDiv();
                 }
 
-                moduleCommon.loaded();
+                Common.loaded();
             }, function () {
                 luckUl.html("");
-                moduleCommon.showInfo("加载失败,请重试!");
-                moduleCommon.loaded();
+                Common.showInfo("加载失败,请重试!");
+                Common.loaded();
             });
         }
 
@@ -252,19 +317,19 @@ $(function () {
         var beginTiger = function () {
             prizeUserStr = '';
             if (prizeID == 0) {
-                moduleCommon.showInfo("请选择奖项!");
+                Common.showInfo("请选择奖项!");
                 return false;
             }
             if (prizeNumber > userArray.length) {
-                moduleCommon.showInfo("抽奖人数不够!");
+                Common.showInfo("抽奖人数不够!");
                 return false;
             }
             if (prizeNumber == 0) {
-                moduleCommon.showInfo("已经没有奖品了!");
+                Common.showInfo("已经没有奖品了!");
                 return false;
             }
             if (prizeNumber > $('#option_slotPrize a[data-prizeid=' + prizeID + ']').find('label').html()) {
-                moduleCommon.showInfo("奖品数量不够哒!");
+                Common.showInfo("奖品数量不够哒!");
                 return false;
             }
             $('.beginTiger').html('停止抽奖').addClass('beginTiger_on');
@@ -358,10 +423,10 @@ $(function () {
         var SubmitSlotMachineFans = function () {
             var submitCount = $("#tigerUserBox li[data-hasluck!=1]").size();
             if ($("#tigerUserBox li[data-hasluck!=1]").size() == 0) {
-                moduleCommon.showInfo('还没有中奖人');
+                Common.showInfo('还没有中奖人');
                 return false;
             }
-            moduleCommon.loading("正在提交，请稍后");
+            Common.loading("正在提交，请稍后");
             var submitForm = $('<form/>');
             $("#tigerUserBox li[data-hasluck!=1]").each(function (index, element) {
                 submitForm.append('<input name="[' + index + '].PrizeId" type="hidden" value="' + $(element).data('level') + '" />');
@@ -369,13 +434,13 @@ $(function () {
                 submitForm.append('<input name="[' + index + '].FansNickName" type="hidden" value="' + $(element).data('nickname') + '" />');
                 submitForm.append('<input name="[' + index + '].FansHead" type="hidden" value="' + $(element).data('headpath') + '" />');
             });
-            $.extendPost(moduleCommon.httpURL + $("#SubmitSlotMachineFans").val() + '?moduleId=' + moduleID, submitForm.serializeArray(), "json", function (data) {
-                moduleCommon.loaded();
+            $.extendPost(Common.httpURL + $("#SubmitSlotMachineFans").val() + '?moduleId=' + moduleID, submitForm.serializeArray(), "json", function (data) {
+                Common.loaded();
                 if (data.ResultType == 1) {
-                    moduleCommon.showInfo("提交成功", 1);
+                    Common.showInfo("提交成功", 1);
                     $("#tigerUserBox li[data-hasluck!=1]").attr('data-hasluck', 1);
                 } else {
-                    moduleCommon.showInfo(data.Message);
+                    Common.showInfo(data.Message);
                 }
             });
         }
@@ -465,5 +530,5 @@ $(function () {
             }
             setScrollDiv();
         }
-    })()
+    })(Common)
 })
