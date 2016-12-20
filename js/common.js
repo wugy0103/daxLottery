@@ -4,7 +4,7 @@
 $(function () {
     (function () {
         //消息提示（type 1:正确信息 0:错误信息）
-        function showInfo() = function (text, type) {
+        var showInfo = function (text, type) {
             $(".info-box").remove();
             if (type == 1) {
                 $("body").append("<div class='info-box'><div class=success>" + text + "</div></div>");
@@ -17,7 +17,7 @@ $(function () {
         };
 
         //显示提示
-        function showTips() = function (obj) {
+        var showTips = function (obj) {
             var v = $(obj);
             var _left = v.offset().left;
             var _top = v.offset().top;
@@ -29,23 +29,23 @@ $(function () {
         };
 
         //移除提示
-        function removeTips() = function () {
+        var removeTips = function () {
             $('.tips_arrow').remove();
             $('.tips').remove();
         };
 
         //加载中
-        function loading() = function (text) {
+        var loading = function (text) {
             $('body').append('<div class="blackbg"></div><div id="loading"><img src="' + '/images/loading.gif" width="150">' + text + '</div>');
         };
 
         //加载完成
-        function loaded() = function () {
+        var loaded = function () {
             $('.blackbg').animate({ 'opacity': '0' }, function () { $('.blackbg').remove(); });
             $('#loading').remove();
         };
 
-        function fillZero() = function (number, digits) {
+        var fillZero = function (number, digits) {
             number = String(number);
             var length = number.length;
             if (number.length < digits) {
