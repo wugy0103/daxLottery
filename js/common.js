@@ -31,7 +31,7 @@ var CommonRemoveTips = function () {
 
 //加载中
 var CommonLoading = function (text) {
-    $('body').append('<div class="blackbg"></div><div id="loading"><img src="' + '/images/loading.gif" width="150">' + text + '</div>');
+    $('body').append('<div class="blackbg"></div><div id="loading"><img src="' + 'images/loading.gif" width="150">' + text + '</div>');
 };
 
 //加载完成

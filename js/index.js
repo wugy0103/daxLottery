@@ -3,7 +3,7 @@
  */
 $(function () {
     var Common =(function () {
-        //ÏûÏ¢ÌáÊ¾£¨type 1:ÕıÈ·ĞÅÏ¢ 0:´íÎóĞÅÏ¢£©
+        //æ¶ˆæ¯æç¤ºï¼ˆtype 1:æ­£ç¡®ä¿¡æ¯ 0:é”™è¯¯ä¿¡æ¯ï¼‰
         var showInfo = function (text, type) {
             $(".info-box").remove();
             if (type == 1) {
@@ -16,30 +16,30 @@ $(function () {
             }, 2000)
         };
 
-        //ÏÔÊ¾ÌáÊ¾
+        //æ˜¾ç¤ºæç¤º
         var showTips = function (obj) {
             var v = $(obj);
             var _left = v.offset().left;
             var _top = v.offset().top;
             var _title = v.data('description');
-            var tipsStr = '<span class="tips_arrow">¡ô</span><div class="tips">' + _title + '</div>';
+            var tipsStr = '<span class="tips_arrow">â—†</span><div class="tips">' + _title + '</div>';
             $('body').append(tipsStr);
             $('.tips_arrow').css({ left: _left + 8, top: _top - 32 });
             $('.tips').css({ 'left': _left, top: _top - 40, 'margin-left': -($('.tips').width() / 2) + 7 });
         };
 
-        //ÒÆ³ıÌáÊ¾
+        //ç§»é™¤æç¤º
         var removeTips = function () {
             $('.tips_arrow').remove();
             $('.tips').remove();
         };
 
-        //¼ÓÔØÖĞ
+        //åŠ è½½ä¸­
         var loading = function (text) {
             $('body').append('<div class="blackbg"></div><div id="loading"><img src="' + '/images/loading.gif" width="150">' + text + '</div>');
         };
 
-        //¼ÓÔØÍê³É
+        //åŠ è½½å®Œæˆ
         var loaded = function () {
             $('.blackbg').animate({ 'opacity': '0' }, function () { $('.blackbg').remove(); });
             $('#loading').remove();
@@ -68,7 +68,7 @@ $(function () {
 
 
     (function (Common) {
-        //±³¾°Í¼ÏÔÊ¾´óĞ¡
+        //èƒŒæ™¯å›¾æ˜¾ç¤ºå¤§å°
         var setBackgroundSize = function () {
             var scale = $(window).width() / $(window).height();
             if (scale < 1.7777) {
@@ -77,7 +77,7 @@ $(function () {
                 $('body').css('background-size', '100% auto');
             }
         };
-        //³õÊ¼»¯
+        //åˆå§‹åŒ–
         var init = function () {
 
             $(window).resize(function () {
@@ -86,9 +86,9 @@ $(function () {
 
             var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
             if (!isChrome) {
-                $("body").prepend('<div id="nohtml5"><div>ÓÉÓÚÄúÕıÔÚÊ¹ÓÃ·Çchromeä¯ÀÀÆ÷,´óÆÁÄ»µÄÌåÑé´¦ÓÚ²»¼Ñ×´Ì¬,½¨ÒéÄúÁ¢¿Ì¸ü»»ä¯ÀÀÆ÷,ÒÔ»ñµÃ¸üºÃµÄÓÃ»§ÌåÑé¡£<br/>ÏÂÔØä¯ÀÀÆ÷:<a href="http://www.chromeliulanqi.com/" target="blank"><img src=" ' + $('#config>#FileWebHost').val() + '/ScreenTheme/default/images/chrome.jpg"> chromeä¯ÀÀÆ÷</a></div></div>');
+                $("body").prepend('<div id="nohtml5"><div>ç”±äºæ‚¨æ­£åœ¨ä½¿ç”¨échromeæµè§ˆå™¨,å¤§å±å¹•çš„ä½“éªŒå¤„äºä¸ä½³çŠ¶æ€,å»ºè®®æ‚¨ç«‹åˆ»æ›´æ¢æµè§ˆå™¨,ä»¥è·å¾—æ›´å¥½çš„ç”¨æˆ·ä½“éªŒã€‚<br/>ä¸‹è½½æµè§ˆå™¨:<a href="http://www.chromeliulanqi.com/" target="blank"><img src=" ' + $('#config>#FileWebHost').val() + '/ScreenTheme/default/images/chrome.jpg"> chromeæµè§ˆå™¨</a></div></div>');
             }
-            //Ä£Äâselect
+            //æ¨¡æ‹Ÿselect
             $(".select").click(function (event) {
                 event.stopPropagation();
                 if (!$(this).parent().hasClass('disabled')) {
@@ -110,48 +110,48 @@ $(function () {
             });
 
 
-            //°ó¶¨¿ªÆô»î¶¯°´Å¥µÄµã»÷ÊÂ¼ş
+            //ç»‘å®šå¼€å¯æ´»åŠ¨æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
             $('#index>#code>a.clickBtn').on('click', function () {
-                //ÒÆ³ı»î¶¯×¼±¸¿ªÊ¼½çÃæ
+                //ç§»é™¤æ´»åŠ¨å‡†å¤‡å¼€å§‹ç•Œé¢
                 $("#index").remove();
 
-                //³É²Ù×÷°´Å¥
+                //æˆæ“ä½œæŒ‰é’®
                 $('.moduleBtn').each(function (i, e) {
                     $('#btn_change').append($(e).html());
                 });
                 $('.moduleBtn').remove();
 
-                //°ó¶¨Ä£¿é²Ù×÷°´Å¥µã»÷ÊÂ¼ş
+                //ç»‘å®šæ¨¡å—æ“ä½œæŒ‰é’®ç‚¹å‡»äº‹ä»¶
                 $('#btn_change>li:not([data-name="messagewalldanmu"])').on('click', function () {
                     var $this = $(this);
-                    //´¥·¢µ±Ç°¼¤»îÄ£¿é±ä»¯ÊÂ¼ş
+                    //è§¦å‘å½“å‰æ¿€æ´»æ¨¡å—å˜åŒ–äº‹ä»¶
                     $('body').triggerHandler('modulechange', [$this.data('name')]);
                 });
 
-                //°ó¶¨ËùÓĞ²Ù×÷°´Å¥Êó±ê»¬¹ıÊÂ¼ş
+                //ç»‘å®šæ‰€æœ‰æ“ä½œæŒ‰é’®é¼ æ ‡æ»‘è¿‡äº‹ä»¶
                 $('#btn_change>li').hover(function () {
                     Common.showTips(this);
                 }, function () {
                     Common.removeTips();
                 });
 
-                //ÏÔÊ¾²Ù×÷°´Å¥
+                //æ˜¾ç¤ºæ“ä½œæŒ‰é’®
                 $('#btn_change').show();
 
-                //ÔÚbodyÉÏ´¥·¢activeÊÂ¼ş
+                //åœ¨bodyä¸Šè§¦å‘activeäº‹ä»¶
                 $('body').triggerHandler('active');
-                //ÔÚbodyÉÏ´¥·¢activeÊÂ¼ş
+                //åœ¨bodyä¸Šè§¦å‘activeäº‹ä»¶
                 $('body').triggerHandler('modulechange', [$('#btn_change>li:not(.btn_fullscreen):eq(0)').data('name')]);
 
             });
 
             $('body').on('modulechange', function (e, moduleName) {
                 if (moduleName != 'qrcode') {
-                    //Òş²Ø¶şÎ¬Âë´óÍ¼
+                    //éšè—äºŒç»´ç å¤§å›¾
                     $('#activityCode>#showCode').hide();
                 }
                 else {
-                    //ÏÔÊ¾¶şÎ¬Âë´óÍ¼
+                    //æ˜¾ç¤ºäºŒç»´ç å¤§å›¾
                     $('#activityCode>#showCode').show();
                 }
             });
@@ -164,15 +164,15 @@ $(function () {
         //var Common = require('common');
         //var fireWork = require('firework');
         var moduleID = $('[data-modulename=' + selfModuleName + ']').data('moduleid');
-        var scrollTime = 500; //¹ö¶¯ËÙ¶È
-        var IntervalTimer = parseInt(Math.random() * 500);//¼ä¸ôÊ±¼ä
-        var scrollNumber = 5;//¹ö¶¯ÁĞÊı,Ä¬ÈÏÓĞ5¸ö
-        var prizeID = 0; //½±Æ·ID
-        var prizeNumber = 10; //³é½±ÈËÊı
-        var isLotteryArray = []; //ÖĞ½±ÓÃ»§
-        var userArray = []; //ÓÃ»§ÁĞ±í
-        var isLotteryScrollID = 0; //ÖĞ½±Ãûµ¥¹ö¶¯ÉèÖÃ
-        var sotpTime = 3000; //Í£Ö¹³é½±Ê±¼ä
+        var scrollTime = 500; //æ»šåŠ¨é€Ÿåº¦
+        var IntervalTimer = parseInt(Math.random() * 500);//é—´éš”æ—¶é—´
+        var scrollNumber = 5;//æ»šåŠ¨åˆ—æ•°,é»˜è®¤æœ‰5ä¸ª
+        var prizeID = 0; //å¥–å“ID
+        var prizeNumber = 10; //æŠ½å¥–äººæ•°
+        var isLotteryArray = []; //ä¸­å¥–ç”¨æˆ·
+        var userArray = []; //ç”¨æˆ·åˆ—è¡¨
+        var isLotteryScrollID = 0; //ä¸­å¥–åå•æ»šåŠ¨è®¾ç½®
+        var sotpTime = 3000; //åœæ­¢æŠ½å¥–æ—¶é—´
         var prizeUserStr = '';
         var tigerUserLiWidth = 90;
         var tigerUserUlWidth = 830;
@@ -230,26 +230,26 @@ $(function () {
             });
         };
         slotmachineInit();
-        //»ñÈ¡½±Æ·ĞÅÏ¢
+        //è·å–å¥–å“ä¿¡æ¯
         var GetSlotMachinePrize = function () {
             $.get("data/GetSlotMachinePrize.json", {}, function (data) {
                 if (data.length > 0) {
                     $('#option_slotPrize').empty();
                     $(data).each(function (index, element) {
-                        $('#option_slotPrize').append('<a data-prizeid="' + element.Id + '" data-prizename="' + element.Name + '" data-amount="' + element.Count + '"><div>' + element.Name + '</div> <span>Ê£<label>' + element.Count + '</label>Ãû</span></a>');
+                        $('#option_slotPrize').append('<a data-prizeid="' + element.Id + '" data-prizename="' + element.Name + '" data-amount="' + element.Count + '"><div>' + element.Name + '</div> <span>å‰©<label>' + element.Count + '</label>å</span></a>');
                     });
                 }
                 $('#option_slotPrize a').click(function () {
                     selectPrize($(this));
                 });
             }, function () {
-                Common.showInfo("¼ÓÔØÊ§°Ü,ÇëÖØÊÔ!");
+                Common.showInfo("åŠ è½½å¤±è´¥,è¯·é‡è¯•!");
                 Common.loaded();
             });
         };
-        //»ñÈ¡ÓÃ»§
+        //è·å–ç”¨æˆ·
         var GetSlotMachineFans = function () {
-            Common.loading('Êı¾İ¼ÓÔØÖĞ,ÇëÉÔºó');
+            Common.loading('æ•°æ®åŠ è½½ä¸­,è¯·ç¨å');
             userArray = [];
             $('#tigerUserBox ul').html('');
             $.get("data/GetSlotMachineFans.json", {}, function (data) {
@@ -261,14 +261,14 @@ $(function () {
                 Common.loaded();
             }, function () {
                 luckUl.html("");
-                Common.showInfo("¼ÓÔØÊ§°Ü,ÇëÖØÊÔ!");
+                Common.showInfo("åŠ è½½å¤±è´¥,è¯·é‡è¯•!");
                 Common.loaded();
             });
         }
 
-        //³õÊ¼»¯¹ö¶¯½çÃæ
+        //åˆå§‹åŒ–æ»šåŠ¨ç•Œé¢
         var setScrollDiv = function () {
-            if (prizeNumber <= 5) {  //ÉèÖÃÒª³öÏÖµÄÁĞÊı
+            if (prizeNumber <= 5) {  //è®¾ç½®è¦å‡ºç°çš„åˆ—æ•°
                 scrollNumber = prizeNumber;
                 $('.tigerMain').addClass('oneTiger');
             } else {
@@ -281,7 +281,7 @@ $(function () {
                 $('.tigerMain').addClass('oneTiger');
             }
 
-            $('.tigerMain').html('');   //Ìí¼ÓÁĞ
+            $('.tigerMain').html('');   //æ·»åŠ åˆ—
             for (var i = 0; i < scrollNumber; i++) {
                 $('.tigerMain').append('<div class="tigerList"><div><ul></ul></div></div>');
             }
@@ -294,7 +294,7 @@ $(function () {
             }
 
             var maxNumber = 0;
-            for (var i = 0; i < userArray.length; i++) { //°ÑÓÃ»§ÁĞ±í×°ÈëÁĞ
+            for (var i = 0; i < userArray.length; i++) { //æŠŠç”¨æˆ·åˆ—è¡¨è£…å…¥åˆ—
                 if (maxNumber == scrollNumber) {
                     maxNumber = 0;
                 }
@@ -302,7 +302,7 @@ $(function () {
                 maxNumber++;
             }
 
-            $('.tigerList').each(function () {  //¸´ÖÆÁĞ±í£¬Ñ­»·¹ö¶¯
+            $('.tigerList').each(function () {  //å¤åˆ¶åˆ—è¡¨ï¼Œå¾ªç¯æ»šåŠ¨
                 var ul = $($(this).find('ul'));
                 if (ul.children().size() > 1) {
                     ul.append(ul.html());
@@ -313,41 +313,41 @@ $(function () {
             });
         };
 
-        //¿ªÊ¼Ò¡½±
+        //å¼€å§‹æ‘‡å¥–
         var beginTiger = function () {
             prizeUserStr = '';
             if (prizeID == 0) {
-                Common.showInfo("ÇëÑ¡Ôñ½±Ïî!");
+                Common.showInfo("è¯·é€‰æ‹©å¥–é¡¹!");
                 return false;
             }
             if (prizeNumber > userArray.length) {
-                Common.showInfo("³é½±ÈËÊı²»¹»!");
+                Common.showInfo("æŠ½å¥–äººæ•°ä¸å¤Ÿ!");
                 return false;
             }
             if (prizeNumber == 0) {
-                Common.showInfo("ÒÑ¾­Ã»ÓĞ½±Æ·ÁË!");
+                Common.showInfo("å·²ç»æ²¡æœ‰å¥–å“äº†!");
                 return false;
             }
             if (prizeNumber > $('#option_slotPrize a[data-prizeid=' + prizeID + ']').find('label').html()) {
-                Common.showInfo("½±Æ·ÊıÁ¿²»¹»ßÕ!");
+                Common.showInfo("å¥–å“æ•°é‡ä¸å¤Ÿå“’!");
                 return false;
             }
-            $('.beginTiger').html('Í£Ö¹³é½±').addClass('beginTiger_on');
+            $('.beginTiger').html('åœæ­¢æŠ½å¥–').addClass('beginTiger_on');
             $('.tigerList').each(function (i) {
                 var ulBox = $(this).find('ul');
                 var _height = ulBox.children().size() * ulHeightHalf;
                 ulBox.height(_height);
-                if (ulBox.children().size() > 2) { //±¾ÁĞÈËÊı´óÓÚ2µÄÊ±ºò²Å¹ö¶¯
+                if (ulBox.children().size() > 2) { //æœ¬åˆ—äººæ•°å¤§äº2çš„æ—¶å€™æ‰æ»šåŠ¨
                     setTimeout(function () {
                         beginScroll(ulBox, _height, scrollTime * (scrollNumber / 2));
                     }, IntervalTimer * i);
-                } else if (ulBox.children().size() == 0) { //±¾ÁĞÈËÊıµÈÓÚ0µÄÊ±ºòÒÆ³ı
+                } else if (ulBox.children().size() == 0) { //æœ¬åˆ—äººæ•°ç­‰äº0çš„æ—¶å€™ç§»é™¤
                     ulBox.parent().remove();
                 }
             });
         };
 
-        //¹ö¶¯
+        //æ»šåŠ¨
         var beginScroll = function (obj, height, timer) {
             obj.animate({'top': -height / 2 + ulHeightHalf + 'px'}, timer, 'linear', function () {
                 obj.css('top', -(height - ulHeight) + 'px');
@@ -356,7 +356,7 @@ $(function () {
         };
 
         var stopTiger = function () {
-            $('.beginTiger').html('¿ªÊ¼³é½±').removeClass('beginTiger_on');
+            $('.beginTiger').html('å¼€å§‹æŠ½å¥–').removeClass('beginTiger_on');
             isLotteryArray = [];
             var allNumber = 0;
             $('.tigerList').each(function (i) {
@@ -364,13 +364,13 @@ $(function () {
                 var _height = ulBox.height();
                 setTimeout(function () {
                     ulBox.stop();
-                    var _top = Math.ceil(parseInt(ulBox.css('top')) / ulHeightHalf) * ulHeightHalf; //ÏòÉÏÈ¡Õû£¬ÈÃËü¹ö¶¯µ½ÕıÈ·Î»ÖÃ;
+                    var _top = Math.ceil(parseInt(ulBox.css('top')) / ulHeightHalf) * ulHeightHalf; //å‘ä¸Šå–æ•´ï¼Œè®©å®ƒæ»šåŠ¨åˆ°æ­£ç¡®ä½ç½®;
                     ulBox.animate({'top': _top}, function () {
-                        var userID; //ÖĞ½±ÈËĞÅÏ¢
+                        var userID; //ä¸­å¥–äººä¿¡æ¯
                         var userHead;
                         var userHeadPath;
                         var userNickName;
-                        //¸ù¾İ²»Í¬µÄ×´Ì¬»ñÈ¡ÖĞ½±ÈË£¬1£ºÖ»ÓĞÒ»ĞĞ£¬2£ºÁ½ĞĞÂúµÄ£¬3£ºÒ»ĞĞÁ½ĞĞ¶¼ÓĞ
+                        //æ ¹æ®ä¸åŒçš„çŠ¶æ€è·å–ä¸­å¥–äººï¼Œ1ï¼šåªæœ‰ä¸€è¡Œï¼Œ2ï¼šä¸¤è¡Œæ»¡çš„ï¼Œ3ï¼šä¸€è¡Œä¸¤è¡Œéƒ½æœ‰
                         if ($('.oneTiger').size() > 0) {
                             ulBox.children('li').each(function () {
                                 if ($(this).position().top == -_top) {
@@ -386,7 +386,7 @@ $(function () {
                         } else {
                             ulBox.children('li').each(function () {
                                 if (ulBox.parent().parent().hasClass('oneUser')) {
-                                    if ($(this).position().top == -_top) {  //±¾ÁĞÖ»ÖĞÒ»¸öÈË
+                                    if ($(this).position().top == -_top) {  //æœ¬åˆ—åªä¸­ä¸€ä¸ªäºº
                                         userID = $(this).data('userid')
                                         userHead = $(this).html();
                                         userHeadPath = $(this).data('headpath');
@@ -396,7 +396,7 @@ $(function () {
                                         $('#option_slotPrize a[data-prizeid=' + prizeID + ']').find('label').html(parseInt($('#option_slotPrize a[data-prizeid=' + prizeID + ']').find('label').html()) - 1);
                                     }
                                 } else {
-                                    if ($(this).position().top == -_top || $(this).position().top == -_top + ulHeightHalf) { //±¾ÁĞÖĞÁ½¸öÈË
+                                    if ($(this).position().top == -_top || $(this).position().top == -_top + ulHeightHalf) { //æœ¬åˆ—ä¸­ä¸¤ä¸ªäºº
                                         userID = $(this).data('userid')
                                         userHead = $(this).html();
                                         userHeadPath = $(this).data('headpath');
@@ -411,7 +411,7 @@ $(function () {
                         isLotteryScrollID = 0;
                         allNumber++;
                         if (allNumber == $('.tigerList').size()) {
-                            $('.beginTiger').removeClass('beginTiger_on'); //¸Ä±äÒ¡¸ËÑùÊ½
+                            $('.beginTiger').removeClass('beginTiger_on'); //æ”¹å˜æ‘‡æ†æ ·å¼
                             showLuckAnimate();
                         }
                     });
@@ -419,14 +419,14 @@ $(function () {
             });
         };
 
-        //Ìá½»ÖĞ½±Ãûµ¥
+        //æäº¤ä¸­å¥–åå•
         var SubmitSlotMachineFans = function () {
             var submitCount = $("#tigerUserBox li[data-hasluck!=1]").size();
             if ($("#tigerUserBox li[data-hasluck!=1]").size() == 0) {
-                Common.showInfo('»¹Ã»ÓĞÖĞ½±ÈË');
+                Common.showInfo('è¿˜æ²¡æœ‰ä¸­å¥–äºº');
                 return false;
             }
-            Common.loading("ÕıÔÚÌá½»£¬ÇëÉÔºó");
+            Common.loading("æ­£åœ¨æäº¤ï¼Œè¯·ç¨å");
             var submitForm = $('<form/>');
             $("#tigerUserBox li[data-hasluck!=1]").each(function (index, element) {
                 submitForm.append('<input name="[' + index + '].PrizeId" type="hidden" value="' + $(element).data('level') + '" />');
@@ -437,14 +437,14 @@ $(function () {
             $.extendPost(Common.httpURL + $("#SubmitSlotMachineFans").val() + '?moduleId=' + moduleID, submitForm.serializeArray(), "json", function (data) {
                 Common.loaded();
                 if (data.ResultType == 1) {
-                    Common.showInfo("Ìá½»³É¹¦", 1);
+                    Common.showInfo("æäº¤æˆåŠŸ", 1);
                     $("#tigerUserBox li[data-hasluck!=1]").attr('data-hasluck', 1);
                 } else {
                     Common.showInfo(data.Message);
                 }
             });
         }
-        //Ä£ÄâselectĞ§¹û
+        //æ¨¡æ‹Ÿselectæ•ˆæœ
         var selectPrize = function (v) {
             $(v).parent().prev().find("a").html($(v).find("div").html());
             $(v).parent().prev().find("a").attr({
@@ -474,7 +474,7 @@ $(function () {
             setScrollDiv();
         }
 
-        //ÏÔÊ¾³é½±¶¯»­
+        //æ˜¾ç¤ºæŠ½å¥–åŠ¨ç”»
         var showLuckAnimate = function () {
             fireWork.show();
             var className = '';
@@ -518,7 +518,7 @@ $(function () {
                     $('#showPrizeUser').remove();
                 });
             }, 3000);
-            if (isLotteryArray.length > 0) { //ÒÆ³ıÒÑÖĞ½±ÈË
+            if (isLotteryArray.length > 0) { //ç§»é™¤å·²ä¸­å¥–äºº
                 for (var i = 0; i < isLotteryArray.length; i++) {
                     $('.tigerMain li[data-userid=' + isLotteryArray[i] + ']').remove();
                     for (var j = 0; j < userArray.length; j++) {

@@ -4,25 +4,94 @@
     <meta charset="UTF-8">
     <title>健康猫年会抽奖</title>
     <link rel="stylesheet" href="css/style.css"/>
+    <style>
+        #main {
+            width: 980px;
+            height: 740px;
+            margin: auto;
+        }
+
+        /*封面*/
+        #index {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #index img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #index a.clickBtn {
+            width: 40.71117561683599%;
+            height: 12.10067763794773%;
+            border-radius: 20px;
+            position: absolute;
+            border: 0px solid #f0cf2a;
+            left: 28.51959361393324%;
+            top: 73.28170377541142%;
+        }
+
+        /*浏览器提示*/
+        #nohtml5 {
+            background: #fff8d4;
+            z-index: 99999;
+            font-size: 14px;
+            height: 50px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+            color: #837955;
+            opacity: 0.4;
+        }
+
+        #nohtml5 div {
+            width: 980px;
+            padding-left: 40px;
+            margin: auto;
+            line-height: 50px;
+            background: url(images/alert.jpg) left no-repeat;
+            height: 50px;
+        }
+
+        #nohtml5 a {
+            color: #837955;
+            margin-left: 10px;
+        }
+
+        #nohtml5 div img {
+            position: relative;
+            top: 5px;
+        }
+
+        .delnohtml5 {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #000;
+            color: #f00;
+            text-align: center;
+            line-height: 20px;
+            top: 15PX;
+            right: 0;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <div id="main">
     <div id="index">
-        <h3>健康猫年会抽奖</h3>
-
-        <h2>健康猫年会抽奖</h2>
-
-        <div id="code"><img src="images/qrcode.jpg"><br/><a class="clickBtn" style="position:relative;">开启活动</a>
-        </div>
-        <div id="company">主办单位：健康猫</div>
-        <div id="copyright">技术支持：健康猫</div>
+        <img src="images/index.png" alt="开屏图片">
+        <a class="clickBtn"></a>
     </div>
-    <div data-moduleid="100120" data-modulename="slotmachine" class="module" id="slotmachine">
-        <ul class="moduleBtn">
-            <li class="btn_slotmachine" data-name="slotmachine" data-description="开心摇奖机"><i class="iconfont">
-                &#xe61a;</i></li>
-        </ul>
-        <span class="title">摇奖机</span>
+    <div data-modulename="slotmachine" class="module" id="slotmachine">
+        <span class="title">健康猫年会摇奖机</span>
 
         <div id="tigerBg">
             <div class="tigerMain"></div>
@@ -74,15 +143,19 @@
         </div>
         <div id="tigerUser">
             <span class="prizeTitle">中奖名单</span>
-            <a class="left arrow"><i class="iconfont">&#xe617;</i></a>
-            <a class="right arrow"><i class="iconfont">&#xe618;</i></a>
+            <a class="left arrow"><</a>
+            <a class="right arrow">></a>
 
             <div id="tigerUserBox">
                 <ul></ul>
             </div>
         </div>
     </div>
-
+    <!--模块切换即点击开始跳转-->
+    <ul class="moduleBtn">
+        <li class="btn_slotmachine" data-name="slotmachine" data-description="摇奖机"><i class="iconfont">
+            &#xe61a;</i></li>
+    </ul>
     <div id="btnBox" style="visibility: hidden;">
         <ul id="btn_change"></ul>
     </div>
@@ -93,25 +166,14 @@
 <script src="js/firework.js"></script>
 <script>
     $(function () {
-        //背景图显示大小
-        var setBackgroundSize = function () {
-            var scale = $(window).width() / $(window).height();
-            if (scale < 1.7777) {
-                $('body').css('background-size', 'auto 100%');
-            } else {
-                $('body').css('background-size', '100% auto');
-            }
-        };
         //初始化
         var init = function () {
-
-            $(window).resize(function () {
-                setBackgroundSize();
-            });
-
             var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
             if (!isChrome) {
-                $("body").prepend('<div id="nohtml5"><div>由于您正在使用非chrome浏览器,大屏幕的体验处于不佳状态,建议您立刻更换浏览器,以获得更好的用户体验。<br/>下载浏览器:<a href="http://www.chromeliulanqi.com/" target="blank"><img src=" ' + $('#config>#FileWebHost').val() + '/ScreenTheme/default/images/chrome.jpg"> chrome浏览器</a></div></div>');
+                $("body").prepend('<div id="nohtml5"><div>由于您正在使用非chrome浏览器,大屏幕的体验处于不佳状态,建议您立刻更换浏览器,以获得更好的用户体验。下载浏览器:<a href="http://www.chromeliulanqi.com/" target="blank"><img src="images/chrome.jpg"> chrome浏览器</a></div><span class="delnohtml5">X</span></div>');
+                $(".delnohtml5").click(function () {
+                    $("#nohtml5").remove();
+                })
             }
             //模拟select
             $(".select").click(function (event) {
@@ -136,7 +198,7 @@
 
 
             //绑定开启活动按钮的点击事件
-            $('#index>#code>a.clickBtn').on('click', function () {
+            $('#index>.clickBtn').on('click', function () {
                 //移除活动准备开始界面
                 $("#index").remove();
 
@@ -152,7 +214,6 @@
                     //触发当前激活模块变化事件
                     $('body').triggerHandler('modulechange', [$this.data('name')]);
                 });
-
 
 
                 //显示操作按钮
@@ -250,7 +311,7 @@
         slotmachineInit();
         //获取奖品信息
         var GetSlotMachinePrize = function () {
-            $.get("data/GetSlotMachinePrize.json",function (data) {
+            $.get("data/GetSlotMachinePrize.json", function (data) {
                 if (data.length > 0) {
                     $('#option_slotPrize').empty();
                     $(data).each(function (index, element) {
@@ -267,7 +328,7 @@
             CommonLoading('数据加载中,请稍后');
             userArray = [];
             $('#tigerUserBox ul').html('');
-            $.get("data/GetSlotMachineFans.json",function (data) {
+            $.get("data/GetSlotMachineFans.json", function (data) {
                 if (data.length > 0) {
                     userArray = data;
                     setScrollDiv();
