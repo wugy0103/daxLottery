@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //获取奖品信息
+    var GetSlotMachinePrize = function () {
+        StorageForGetReful("DaxPrize","data/GetSlotMachinePrize.json",GetDaxPrize);
+        function GetDaxPrize(data) {
+            if (data.length > 0) {
+                $('#option_slotPrize').empty();
+                $(data).each(function (index, element) {
+                    $('#option_slotPrize').append('<a data-prizeid="' + element.Id + '" data-prizename="' + element.Name + '" data-amount="' + element.Count + '"><div>' + element.Name + '</div> <span>剩<label>' + element.Count + '</label>名</span></a>');
+                });
+            }
+            $('#option_slotPrize a').click(function () {
+                selectPrize($(this));
+            });
+        }
+    };
+    //获取用户
+    var GetSlotMachineFans = function () {
+        CommonLoading('数据加载中,请稍后');
+        userArray = [];
+        $('#tigerUserBox ul').html('');
+        StorageForGetReful("DaxFans","data/GetSlotMachineFans.json",GetDaxFans)
+        function GetDaxFans (data){
+            if (data.length > 0) {
+                userArray = data;
+                setScrollDiv();
+            }
+            CommonLoaded();
+        }
+    }
+    //获取接口后存本地
+    function StorageForGetReful(key,url,callback){
+        if(localStorage[key]){
+            callback(localStorage[key]);
+        }else {
+            $.get(url, function (data) {
+                var data=JSON.parse(data);
+                localStorage[key]=data;
+                callback(localStorage[key]);
+            });
+        }
+    }
+</script>
+</body>
+</html>
