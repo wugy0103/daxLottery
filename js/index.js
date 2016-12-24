@@ -4,7 +4,7 @@
 $(function () {
     //初始化
     var selfModuleName = 'slotmachine';
-    var scrollTime = 100; //滚动速度
+    var scrollTime = 1000; //滚动速度
     var IntervalTimer = parseInt(Math.random() * 300);//间隔时间
     var scrollNumber = 5;//滚动列数,默认有5个
     var prizeID = 0; //奖品ID
@@ -218,7 +218,8 @@ $(function () {
             var ul = $($(this).find('ul'));
             if (ul.children().size() > 1) {
                 ul.append(ul.html());
-                ul.css('top', -ul.height()/2 + 'px');
+                //ul.css('top', -ul.height()/2 + 'px');
+                ul.css('top', -ul.height() + ulHeight + 'px');
             } else {
                 ul.css('top', '0');
             }
@@ -408,7 +409,7 @@ $(function () {
         $("#slotmachineFlash").css('opacity', 1).show();
         var _left = $('#tigerUserBox').offset().left;
         var _top = $('#tigerUserBox').offset().top;
-        
+
         setTimeout(function () {
             $('.tigerUser').each(function (index) {
                 var _this = $(this);
