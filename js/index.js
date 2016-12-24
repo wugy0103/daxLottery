@@ -17,7 +17,7 @@ $(function () {
     var prizeUserStr = '';
     var tigerUserLiWidth = 120;
     var tigerUserUlWidth = 860;
-    var ulHeight = 270;
+    var ulHeight = 250;
     var ulHeightHalf = 125;
     var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
     if (!isChrome) {
@@ -174,6 +174,7 @@ $(function () {
 
     //初始化滚动界面
     var setScrollDiv = function () {
+        $(".tigerList").addClass("wait");
         if (prizeNumber <= 5) {  //设置要出现的列数
             scrollNumber = prizeNumber;
             $('.tigerMain').addClass('oneTiger');
@@ -226,6 +227,7 @@ $(function () {
 
     //开始摇奖
     var beginTiger = function () {
+
         prizeUserStr = '';
         if (prizeID == 0) {
             CommonShowInfo("请选择奖项!");
@@ -250,6 +252,7 @@ $(function () {
             ulBox.height(_height);
             if (ulBox.children().size() > 2) { //本列人数大于2的时候才滚动
                 setTimeout(function () {
+                    $(".tigerList").removeClass("wait");
                     beginScroll(ulBox, _height, scrollTime * (scrollNumber / 2));
                 }, IntervalTimer * i);
             } else if (ulBox.children().size() == 0) { //本列人数等于0的时候移除
@@ -353,23 +356,7 @@ $(function () {
             CommonShowInfo('还没有中奖人');
             return false;
         }
-        //CommonLoading("正在提交，请稍后");
-        //var submitForm = $('<form/>');
-        //$("#tigerUserBox li[data-hasluck!=1]").each(function (index, element) {
-        //    submitForm.append('<input name="[' + index + '].PrizeId" type="hidden" value="' + $(element).data('level') + '" />');
-        //    submitForm.append('<input name="[' + index + '].FansId" type="hidden" value="' + $(element).data('isluck') + '" />');
-        //    submitForm.append('<input name="[' + index + '].FansNickName" type="hidden" value="' + $(element).data('nickname') + '" />');
-        //    submitForm.append('<input name="[' + index + '].FansHead" type="hidden" value="' + $(element).data('headpath') + '" />');
-        //});
-        //$.get("data/SubmitSlotMachineFans.json", function (data) {
-        //    CommonLoaded();
-        //    if (data.ResultType == 1) {
-        //        CommonShowInfo("提交成功", 1);
-        //        $("#tigerUserBox li[data-hasluck!=1]").attr('data-hasluck', 1);
-        //    } else {
-        //        CommonShowInfo(data.Message);
-        //    }
-        //});
+
         $("#tigerUserBox ul").html("");
         CommonShowInfo("提交成功", 1)
     }

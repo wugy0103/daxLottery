@@ -154,7 +154,7 @@ a.disabled:hover {background:#8b8b8b;}
 #tigerSelect .select_option { overflow:auto;}
 #tigerSelect .select_option a,#tigerSelect .select a { margin-left:0; word-break:normal; overflow:hidden;}
 #tigerSelect a.btn {margin-left: 20px; font-size: 16px;}
-.tigerList {  width:120px; margin-left:30px; height: 270px; display: inline-block; overflow: hidden; position: relative; vertical-align: top; }
+.tigerList {  width:120px; margin-left:30px; height: 258px; display: inline-block; overflow: hidden; position: relative; vertical-align: top; }
 .tigerList div { width: 100%; position: absolute; top: 8px; height: 270px; overflow: hidden;}
 .tigerList div ul { width:100%; font-size: 0; position: absolute; top: 0;}
 .tigerList div ul li img { width:116px; height:70px; border:2px solid #fff; border-radius: 10px; margin-top: 25px;position: absolute;
@@ -162,14 +162,20 @@ a.disabled:hover {background:#8b8b8b;}
     left: 0;}
 .tigerList div ul li { width:100%; height:125px;
     position: relative;}
-.tigerList div ul li::after {
+.tigerList.wait div ul li::after {
+    content: "敬请期待";
+    color: #fff;
     position: absolute;
-    top: 0;
+    top: 25px;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #FF0000;
+    width: 116px;
+    height: 70px;
+    background:url("../images/itembg.png") no-repeat;
+    line-height: 70px;
+    font-size: 22px;
     z-index: 100;
+    border-radius: 10px;
+    border: 2px solid #fff;
 }
 .tigerList span {
     position: absolute;
