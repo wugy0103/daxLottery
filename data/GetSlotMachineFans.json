@@ -242,6 +242,7 @@
   { "Id": "242", "NickName": "伍家杰", "Phone": "13106910237", "CatNumber": "", "IsPrivateteach": false },
   { "Id": "243", "NickName": "梁广柱", "Phone": "13450199367", "CatNumber": "", "IsPrivateteach": false },
   { "Id": "244", "NickName": "李子忠", "Phone": "15622163450", "CatNumber": "", "IsPrivateteach": false },
-  { "Id": "245", "NickName": "陈建秀", "Phone": "13610215229", "CatNumber": "wuyuan123", "IsPrivateteach": true }
+  { "Id": "245", "NickName": "陈建秀", "Phone": "13610215229", "CatNumber": "wuyuan123", "IsPrivateteach": true },
+  { "Id": "246", "NickName": "李富荣", "Phone": "15521336076", "CatNumber": "wuyuan123", "IsPrivateteach": true }
 
 ]

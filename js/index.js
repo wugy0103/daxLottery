@@ -16,8 +16,8 @@ $(function () {
     var sotpTime = 1000; //停止抽奖时间
     var prizeUserStr = '';
     var tigerUserLiWidth = 120;
-    var tigerUserUlWidth = 830;
-    var ulHeight = 250;
+    var tigerUserUlWidth = 860;
+    var ulHeight = 270;
     var ulHeightHalf = 125;
     var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
     if (!isChrome) {
@@ -125,7 +125,12 @@ $(function () {
                 prizeArray=data;
                 $('#option_slotPrize').empty();
                 $(data).each(function (index, element) {
-                    $('#option_slotPrize').append('<a data-prizeid="' + element.Id + '" data-prizename="' + element.Name + '" data-amount="' + element.Count + '"><div>' + element.Name + '</div> <span>剩<label>' + element.Count + '</label>名</span></a>');
+                    if(element.Id==2007){
+                        $('#option_slotPrize').append('<a data-prizeid="' + element.Id + '" data-prizename="' + element.Name + '" data-amount="' + element.Count + '"><div>' + element.Name + '</div> <span style="visibility: hidden;">剩<label>' + element.Count + '</label>名</span></a>');
+                    }else {
+                        $('#option_slotPrize').append('<a data-prizeid="' + element.Id + '" data-prizename="' + element.Name + '" data-amount="' + element.Count + '"><div>' + element.Name + '</div> <span>剩<label>' + element.Count + '</label>名</span></a>');
+                    }
+
                 });
             }
             $('#option_slotPrize a').click(function () {
@@ -153,6 +158,13 @@ $(function () {
             callback(JSON.parse(localStorage[key]));
         }else {
             $.get(url, function (data) {
+                function randomsort(a, b) {
+                    return Math.random()>.5 ? -1 : 1;
+    //用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
+                }
+                if(key=="DaxFans"){
+                     data = data.sort(randomsort);
+                }
                 var data=JSON.stringify(data);
                 localStorage[key]=data;
                 callback(JSON.parse(localStorage[key]));
@@ -192,7 +204,12 @@ $(function () {
             if (maxNumber == scrollNumber) {
                 maxNumber = 0;
             }
-            $('.tigerList').eq(maxNumber).find('ul').append('<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '"><img onError="imgError(this)" src="images/itembg.png"/><span class="NickName">'+userArray[i].NickName+'</span><span class="Phone">'+userArray[i].Phone+'</span></li>');
+            if(userArray[i].IsPrivateteach==true){
+                $('.tigerList').eq(maxNumber).find('ul').append('<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '"><img onError="imgError(this)" src="images/itembg.png"/><span class="NickName">'+userArray[i].NickName+'</span><span class="Phone">'+userArray[i].CatNumber+'</span></li>');
+            }else {
+                $('.tigerList').eq(maxNumber).find('ul').append('<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '"><img onError="imgError(this)" src="images/itembg.png"/><span class="NickName">'+userArray[i].NickName+'</span><span class="Phone">'+userArray[i].Phone+'</span></li>');
+            }
+
             maxNumber++;
         }
 
@@ -200,7 +217,7 @@ $(function () {
             var ul = $($(this).find('ul'));
             if (ul.children().size() > 1) {
                 ul.append(ul.html());
-                ul.css('top', -ul.height() + ulHeight + 'px');
+                ul.css('top', -ul.height()/2 + 'px');
             } else {
                 ul.css('top', '0');
             }
