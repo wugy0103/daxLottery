@@ -174,7 +174,6 @@ $(function () {
 
     //初始化滚动界面
     var setScrollDiv = function () {
-        $(".tigerList").addClass("wait");
         if (prizeNumber <= 5) {  //设置要出现的列数
             scrollNumber = prizeNumber;
             $('.tigerMain').addClass('oneTiger');
@@ -213,6 +212,7 @@ $(function () {
 
             maxNumber++;
         }
+        $(".tigerList").addClass("wait");
 
         $('.tigerList').each(function () {  //复制列表，循环滚动
             var ul = $($(this).find('ul'));
@@ -408,6 +408,7 @@ $(function () {
         $("#slotmachineFlash").css('opacity', 1).show();
         var _left = $('#tigerUserBox').offset().left;
         var _top = $('#tigerUserBox').offset().top;
+        
         setTimeout(function () {
             $('.tigerUser').each(function (index) {
                 var _this = $(this);

@@ -270,7 +270,7 @@ a.disabled:hover {background:#8b8b8b;}
 }
 #showPrizeUser { position: absolute; width: 100%; left: 0; right: 0; margin-top: -250px;  top: 50%;  text-align: center; z-index: 999999;}
 #showPrizeUser ul { display:inline-block;margin: auto; background: #000; max-width: 800px; padding: 20px; border-radius: 20px;}
-#showPrizeUser li { border-radius: 10px; border: 2px solid rgba(255,255,255,0.6); width: 120px; height: 120px; display: inline-block; overflow: hidden; position: relative; margin:10px 15px 15px 10px;}
+#showPrizeUser li { border-radius: 10px; border: 2px solid rgba(255,255,255,0.6); width: 120px; height: 82px; display: inline-block; overflow: hidden; position: relative; margin:10px 15px 15px 10px;}
 #showPrizeUser li img,.tigerUser img  { width: 100%;
     height: 75px;}
 
