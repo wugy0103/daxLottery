@@ -19,6 +19,7 @@ $(function () {
     var tigerUserUlWidth = 860;
     var ulHeight = 250;
     var ulHeightHalf = 125;
+
     var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
     if (!isChrome) {
         $("body").prepend('<div id="nohtml5"><div>由于您正在使用非chrome浏览器,大屏幕的体验处于不佳状态,建议您立刻更换浏览器,以获得更好的用户体验。下载浏览器:<a href="http://www.chromeliulanqi.com/" target="blank"><img src="images/chrome.jpg"> chrome浏览器</a></div><span class="delnohtml5">X</span></div>');
@@ -59,10 +60,11 @@ $(function () {
     });
     //slotmachineInit
     $('body').on('active', function () {
+        //选择人数时
         $('#option_slotNumber a').click(function () {
             selectLotteryNumber($(this));
         });
-        //删除用户
+        //删除用户弃权
         $('body').on('click', '#tigerUserBox>ul>li>a', function () {
             var dataLevel = $(this).parent().data('level');
             $(this).parent().remove();
@@ -75,7 +77,7 @@ $(function () {
             }
             localStorage.DaxPrize=JSON.stringify(prizeArray)
         });
-
+        //点击开始按钮
         $('.beginTiger').click(function () {
             if (!$(this).hasClass('beginTiger_on')) {
                 beginTiger();
@@ -83,6 +85,7 @@ $(function () {
                 stopTiger();
             }
         });
+        //点击停止按钮
         $('.tiger_hidden').click(function () {
             if ($(this).hasClass('on')) {
                 $('#tigerUser').show();
@@ -92,13 +95,16 @@ $(function () {
                 $(this).addClass('on');
             }
         });
+        //点击提交按钮
         $('.tiger_submit').click(function () {
             SubmitSlotMachineFans();
         });
+        //点击左箭头
         $('#tigerUser a.left').mousedown(function () {
             isLotteryScrollID = Math.max(0, isLotteryScrollID - 1);
             $('#tigerUserBox ul').stop().animate({'left': Math.min(0, -isLotteryScrollID * tigerUserUlWidth)});
         });
+        //点击右箭头
         $('#tigerUser a.right').click(function () {
             isLotteryScrollID = Math.min(Math.ceil($("#tigerUserBox ul").width() / tigerUserUlWidth) - 1, isLotteryScrollID + 1);
             $('#tigerUserBox ul').stop().animate({'left': -tigerUserUlWidth * isLotteryScrollID});
@@ -109,8 +115,8 @@ $(function () {
     $('body').on('modulechange', function (e, moduleName) {
         if (moduleName == selfModuleName) {
             $('#slotmachine').show();
-            GetSlotMachineFans();
-            GetSlotMachinePrize();
+            GetFans();
+            GetPrize();
         } else {
             $('#slotmachine').hide();
         }
@@ -118,14 +124,14 @@ $(function () {
 
 
     //获取奖品信息
-    var GetSlotMachinePrize = function () {
-        StorageForGetReful("DaxPrize","data/GetSlotMachinePrize.json",GetDaxPrize);
+    var GetPrize = function () {
+        StorageForGetReful("DaxPrize","data/GetPrize.json",GetDaxPrize);
         function GetDaxPrize(data) {
             if (data.length > 0) {
                 prizeArray=data;
                 $('#option_slotPrize').empty();
                 $(data).each(function (index, element) {
-                    if(element.Id==2007){
+                    if(element.Id==2005){
                         $('#option_slotPrize').append('<a data-prizeid="' + element.Id + '" data-prizename="' + element.Name + '" data-amount="' + element.Count + '"><div>' + element.Name + '</div> <span style="visibility: hidden;">剩<label>' + element.Count + '</label>名</span></a>');
                     }else {
                         $('#option_slotPrize').append('<a data-prizeid="' + element.Id + '" data-prizename="' + element.Name + '" data-amount="' + element.Count + '"><div>' + element.Name + '</div> <span>剩<label>' + element.Count + '</label>名</span></a>');
@@ -139,11 +145,11 @@ $(function () {
         }
     };
     //获取用户
-    var GetSlotMachineFans = function () {
+    var GetFans = function () {
         CommonLoading('数据加载中,请稍后');
         userArray = [];
         $('#tigerUserBox ul').html('');
-        StorageForGetReful("DaxFans","data/GetSlotMachineFans.json",GetDaxFans)
+        StorageForGetReful("DaxFans","data/GetFans.json",GetDaxFans)
         function GetDaxFans (data){
             if (data.length > 0) {
                 userArray = data;
@@ -152,16 +158,18 @@ $(function () {
             CommonLoaded();
         }
     }
+
+    function randomsort(a, b) {
+        return Math.random()>.5 ? -1 : 1;
+        //用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
+    }
+
     //获取接口后存本地
     function StorageForGetReful(key,url,callback){
         if(localStorage[key]){
             callback(JSON.parse(localStorage[key]));
         }else {
             $.get(url, function (data) {
-                function randomsort(a, b) {
-                    return Math.random()>.5 ? -1 : 1;
-    //用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
-                }
                 if(key=="DaxFans"){
                      data = data.sort(randomsort);
                 }
@@ -199,7 +207,7 @@ $(function () {
             });
         }
 
-        var maxNumber = 0;
+        var maxNumber = 0;//要装进去的列
         for (var i = 0; i < userArray.length; i++) { //把用户列表装入列
             if (maxNumber == scrollNumber) {
                 maxNumber = 0;
@@ -246,7 +254,12 @@ $(function () {
             CommonShowInfo("奖品数量不够哒!");
             return false;
         }
+        if ($("#tigerUserBox>ul").html() != "") {
+            CommonShowInfo("请先确认名单!");
+            return false;
+        }
         $('.beginTiger').html('停止抽奖').addClass('beginTiger_on');
+        $("#tigerSelect").append('<div class="shade1"></div><div class="shade2"></div>');
         $('.tigerList').each(function (i) {
             var ulBox = $(this).find('ul');
             var _height = ulBox.children().size() * ulHeightHalf;
@@ -271,6 +284,7 @@ $(function () {
     };
 
     var stopTiger = function () {
+        $(".shade1").width("100%");
         $('.beginTiger').html('开始抽奖').removeClass('beginTiger_on');
         isLotteryArray = [];
         var allNumber = 0;
@@ -343,6 +357,8 @@ $(function () {
                     allNumber++;
                     if (allNumber == $('.tigerList').size()) {
                         $('.beginTiger').removeClass('beginTiger_on'); //改变摇杆样式
+                        $(".shade1").width("0");
+                        $(".shade2").width("0");
                         showLuckAnimate();
                     }
                 });
@@ -361,7 +377,7 @@ $(function () {
         $("#tigerUserBox ul").html("");
         CommonShowInfo("提交成功", 1)
     }
-    //模拟select效果
+    //模拟select效果--选择奖品时
     var selectPrize = function (v) {
         $(v).parent().prev().find("a").html($(v).find("div").html());
         $(v).parent().prev().find("a").attr({

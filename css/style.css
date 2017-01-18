@@ -150,6 +150,22 @@ a.disabled:hover {background:#8b8b8b;}
 #tigerUser a.right { right: -4px;}
 .tigerMain {width:800px; height:279px; position:absolute; top:-5px; left:40px;text-align: center;overflow:hidden; }
 #tigerSelect a.beginTiger_on { background: #f3ae00;}
+#tigerSelect .shade1 {
+    position: absolute;
+    width: 63%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+#tigerSelect .shade2 {
+    position: absolute;
+    width: 23%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
 #tigerSelect { text-align: center;position: relative; height: 52px; color: #fff; width: 900px; margin: auto; border-radius: 5px; background: rgba(0,0,0,0.3); font-size: 16px;}
 #tigerSelect .select_option { overflow:auto;}
 #tigerSelect .select_option a,#tigerSelect .select a { margin-left:0; word-break:normal; overflow:hidden;}
