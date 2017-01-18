@@ -169,13 +169,20 @@ $(function () {
         if(localStorage[key]){
             callback(JSON.parse(localStorage[key]));
         }else {
-            $.get(url, function (data) {
-                if(key=="DaxFans"){
-                     data = data.sort(randomsort);
+            $.ajax({
+                url:url,
+                type:"GET",
+                success:function (data) {
+                    if(key=="DaxFans"){
+                        data = data.sort(randomsort);
+                    }
+                    var data=JSON.stringify(data);
+                    localStorage[key]=data;
+                    callback(JSON.parse(localStorage[key]));
+                },
+                error: function (error) {
+                    console.log(error);
                 }
-                var data=JSON.stringify(data);
-                localStorage[key]=data;
-                callback(JSON.parse(localStorage[key]));
             });
         }
     }
