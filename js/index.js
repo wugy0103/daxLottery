@@ -85,7 +85,6 @@ $(function () {
                 stopTiger();
             }
         });
-        //点击停止按钮
         $('.tiger_hidden').click(function () {
             if ($(this).hasClass('on')) {
                 $('#tigerUser').show();
@@ -469,6 +468,7 @@ $(function () {
                     }
                 }
             }
+            userArray = userArray.sort(randomsort);
             localStorage.DaxFans=JSON.stringify(userArray);
         }
         setScrollDiv();
