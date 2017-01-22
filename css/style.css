@@ -19,7 +19,8 @@ a.middleBtn { padding:0 15px;font-size:20px; height:40px; line-height:40px;}
 .module { position:absolute; top:0; left:0; right:0;
     bottom: 0;
     margin: auto;height:535px;
-    width: 980px; display:none;}
+    max-width: 980px;
+    width: 100%; display:none;}
 
 .closeBtn { position:absolute; height:30px; width:30px; right:0; top:0; z-index:9999; color:#afafaf; font-size:20px; font-family:Arial, Helvetica, sans-serif; line-height:30px; text-align:center; cursor:pointer;}
 span.title { font-size:24px; padding:0 180px 0 30px; height: 50px; line-height: 50px; display:block; background: rgba(0,0,0,0.5); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -115,10 +116,10 @@ a.disabled:hover {background:#8b8b8b;}
 .tips_arrow { font-size:30px; position:absolute;color:#fff; z-index:99999;}
 
 /*老虎机*/
-#tigerBg {height:270px; width:900px; margin: 20px auto 10px auto; position:relative; background: rgba(0,0,0,0.3);}
-#tigerUserBox { position:relative; width:860px; margin-left: 42px; height:80px; overflow: hidden; margin-top: 15px; z-index: 100; }
+#tigerBg {height:270px; width:95%; margin: 20px auto 10px auto; position:relative; background: rgba(0,0,0,0.3);}
+#tigerUserBox { position:relative; width:100%; height:80px; overflow: hidden; margin-top: 15px; z-index: 100; }
 #tigerUserBox li { position: relative;}
-#tigerUserBox li a { display: none; font-size: 14px;  width: 20px; height: 20px; line-height: 18px; text-align: center; border-radius: 100%; background: rgba(0,0,0,.6); color: #fff; position: absolute; top: 5px; right: 5px;}
+#tigerUserBox li a { display: none; font-size: 12px;  width: 40px; height: 20px; line-height: 20px; text-align: center; border-radius: 5px; background: rgba(0,0,0,.6); color: #fff; position: absolute; top: 0px; right: 5px;}
 #tigerUserBox li:hover a { display: block;}
 #tigerUser span.prizeTitle { position: absolute; left: 20px; width: 15px; top: 12px; opacity: 0.7; font-size: 14px;}
 #tigerUser ul { position: relative;
@@ -143,12 +144,27 @@ a.disabled:hover {background:#8b8b8b;}
     font-size: 12px;
 }
 
-#tigerUser { padding:0 40px; width:900px; height:100px; position:absolute; left:0px; bottom:22px;border-radius: 5px; z-index: 100; background: rgba(0,0,0,0.3);}
+#tigerUser {     padding: 0 40px 0 82px;
+    width: 95%;
+    box-sizing: border-box;
+    height: 100px;
+    position: absolute;
+    left: 0px;
+    right: 0;
+    margin: auto;
+    bottom: 22px;
+    border-radius: 5px;
+    z-index: 100;
+    background: rgba(0,0,0,0.3);}
 #tigerUser a { color:#fff;}
 #tigerUser a.left { left: 50px;}
 #tigerUser a i { font-size: 38px;}
 #tigerUser a.right { right: -4px;}
-.tigerMain {width:800px; height:279px; position:absolute; top:-5px; left:40px;text-align: center;overflow:hidden; }
+.tigerMain {width:95%; height:279px; position:absolute; top:-5px;text-align: center;overflow:hidden;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
 #tigerSelect a.beginTiger_on { background: #f3ae00;}
 #tigerSelect .shade1 {
     position: absolute;
@@ -166,7 +182,7 @@ a.disabled:hover {background:#8b8b8b;}
     right: 0;
     z-index: 999;
 }
-#tigerSelect { text-align: center;position: relative; height: 52px; color: #fff; width: 900px; margin: auto; border-radius: 5px; background: rgba(0,0,0,0.3); font-size: 16px;}
+#tigerSelect { text-align: center;position: relative; height: 52px; color: #fff; width: 95%; margin: auto; border-radius: 5px; background: rgba(0,0,0,0.3); font-size: 16px;}
 #tigerSelect .select_option { overflow:auto;}
 #tigerSelect .select_option a,#tigerSelect .select a { margin-left:0; word-break:normal; overflow:hidden;}
 #tigerSelect a.btn {margin-left: 20px; font-size: 16px;}
@@ -356,7 +372,7 @@ div.normalImg { width: 116px; height: 70px;}
     to{transform:rotate(359deg)}
 }
 .flash { position:absolute; top:-100px; left:50%; margin-left:-800px; z-index:9999; display:none; opacity:0.5;}
-.fire {position:absolute; width:980px; left: 50%; margin-left: -490px; background:rgba(0,0,0,0.5);  text-align:center; z-index:9999; height: 535px; padding-top: 30px; box-sizing: border-box; top: -5000px;}
+.fire {position:absolute; max-width:980px;width: 100%; left: 50%; margin-left: -490px; background:rgba(0,0,0,0.5);  text-align:center; z-index:9999; height: 535px; padding-top: 30px; box-sizing: border-box; top: -5000px;}
 .fire:before { content: ''; display: block; margin: auto; width: 500px; height:500px; background: url(../images/fire1.png) no-repeat; background-size: 100%;-webkit-animation: fireanimate .5s linear infinite;}
 @-webkit-keyframes fireanimate {
     0% { background: url(../images/fire1.png) no-repeat; background-size: 100%; }

@@ -16,7 +16,7 @@ $(function () {
     var sotpTime = 1000; //停止抽奖时间
     var prizeUserStr = '';
     var tigerUserLiWidth = 120;
-    var tigerUserUlWidth = 860;
+    var tigerUserUlWidth = 513;
     var ulHeight = 250;
     var ulHeightHalf = 125;
 
@@ -442,13 +442,13 @@ $(function () {
                         'width': '70px',
                         'height': '70px'
                     }, 'slow', function () {
-                        $('#tigerUserBox ul').prepend('<li data-level="' + _this.data('level') + '" data-headpath="' + _this.data('headpath') + '" data-nickname="' + _this.data('nickname') + '" data-isluck="' + _this.data('isluck') + '" >' + _this.html() + '<a>x</a></li>');
+                        $('#tigerUserBox ul').prepend('<li data-level="' + _this.data('level') + '" data-headpath="' + _this.data('headpath') + '" data-nickname="' + _this.data('nickname') + '" data-isluck="' + _this.data('isluck') + '" >' + _this.html() + '<a>弃权</a></li>');
                         $('#tigerUserBox ul').width($('#tigerUserBox ul li').size() * tigerUserLiWidth).css('left', 0);
                         _this.remove();
                     });
                 }, index * 100);
             });
-        }, 2500);
+        }, 5000);
         setTimeout(function () {
             FireworkHide();
             $(".light").animate({"opacity": "0"}, "slow", function () {
@@ -457,7 +457,7 @@ $(function () {
             $('#showPrizeUser').animate({'opacity': '0'}, 'slow', function () {
                 $('#showPrizeUser').remove();
             });
-        }, 3000);
+        }, 5500);
         if (isLotteryArray.length > 0) { //移除已中奖人
             for (var i = 0; i < isLotteryArray.length; i++) {
                 $('.tigerMain li[data-userid=' + isLotteryArray[i] + ']').remove();
